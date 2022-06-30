@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <title>New Note</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h2>New Note</h2>
+        <form action="/private-note/createNote" method="POST">
+            <div class="form-group">
+                <textarea class="form-control" type="text" name="newNote" id="newNote" placeholder="Add new Note"></textarea>
+                <button class="btn btn-success" type="submit">Create note</button>
+            </div>
+    </div>
+    </form>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+
+</html>
