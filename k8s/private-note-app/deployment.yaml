@@ -15,10 +15,10 @@ spec:
         app: private-note-app
     spec:
       containers:
-      - name: private-note-app-api
+      - name: private-note-app-container
         envFrom:
           - configMapRef:
-              name: private-note-app-configs
+              name: private-note-app-config
         image: private-note
         imagePullPolicy: IfNotPresent
 
