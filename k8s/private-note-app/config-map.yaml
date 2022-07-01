@@ -4,9 +4,8 @@ metadata:
   name: private-note-app-config
   namespace: default
 data:
-  DB_USER: "admin1"
-  DB_PASS: "admin1"
-  DB_HOST: "mongodb"
+  EXPIRE_TIME: "20"
+  DB_HOST: "mongodb-service"
   DB_PORT: "27017"
   DB_NAME: "private_notes"
   WEB_PORT: "3000"

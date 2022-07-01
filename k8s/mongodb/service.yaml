@@ -4,7 +4,7 @@ metadata:
   name: mongodb-service
 spec:
   selector:
-    app: mongodb
+    app: mongodb-deployment
   ports:
     - protocol: TCP
       port: 27017

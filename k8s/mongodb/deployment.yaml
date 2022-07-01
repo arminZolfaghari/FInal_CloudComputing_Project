@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb
+  name: mongodb-deployment
   labels:
-    app: mongodb
+    app: mongodb-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongodb
+      app: mongodb-deployment
   template:
     metadata:
       labels:
-        app: mongodb
+        app: mongodb-deployment
     spec:
       containers:
-      - name: mongodb
+      - name: mongodb-deployment
         image: mongo
         imagePullPolicy: IfNotPresent
         ports:
-          - containerPort: 2717
+          - containerPort: 27017
         envFrom:
           - configMapRef:
               name: mongodb-config
@@ -28,10 +28,11 @@ spec:
         volumeMounts:
           - name: mongodb-persistent-storage
             mountPath: /data/db
-    volumes:
+
+      volumes:
       - name: mongodb-persistent-storage
         persistentVolumeClaim:
-          # TODO
+            claimName: mongodb-pvc
 
 
 

@@ -19,6 +19,8 @@ spec:
         envFrom:
           - configMapRef:
               name: private-note-app-config
+          - secretRef:
+              name: private-note-secret
         image: private-note
         imagePullPolicy: IfNotPresent
 
