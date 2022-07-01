@@ -32,8 +32,14 @@ router.get('/note/:noteId', async (req, res) => {
         console.log(`in get note => ${noteId}`)
         const note = await getNote(noteId)
         console.log(note)
-        if (note)
-            return res.render('showWarning.ejs', {noteId})
+        if (note) {
+            const createdAt = note.createdAt
+            const now = new Date()
+            const duration = (now - createdAt) / 1000
+            console.log(duration)
+            if (duration <= config.EXPIRE_TIME)
+                return res.render('showWarning.ejs', {noteId})
+        }
         else {
             const errorMessage = "There isn't note"
             return res.render('showError', {errorMessage})
