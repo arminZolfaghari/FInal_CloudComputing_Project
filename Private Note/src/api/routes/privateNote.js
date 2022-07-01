@@ -1,5 +1,6 @@
 import express from "express";
-import {addNoteToDB} from "../../services/note.js";
+import {addNoteToDB, getNote, deleteNote} from "../../services/note.js";
+import {config} from "../../config/config.js";
 
 
 const router = new express.Router()
@@ -17,26 +18,46 @@ router.post('/createNote', async (req, res) => {
     try {
         let {newNote} = req.body
         let noteInfo = await addNoteToDB(newNote)
-        console.log(noteInfo.toString())
+        let noteLink = `http://localhost:${config.WEB_PORT}/private-note/note/${noteInfo}`
+        return res.render('showLink', {noteLink})
     }
     catch (err){
-
+        console.log(`Err: ${err}`)
     }
 })
 
-router.get('/note', async (req, res) => {
+router.get('/note/:noteId', async (req, res) => {
     try {
-
+        const {noteId} = req.params
+        console.log(`in get note => ${noteId}`)
+        const note = await getNote(noteId)
+        console.log(note)
+        if (note)
+            return res.render('showWarning.ejs', {noteId})
+        else {
+            const errorMessage = "There isn't note"
+            return res.render('showError', {errorMessage})
+        }
     }
     catch (err){
-
+        console.log(`Err: ${err}`)
     }
 })
 
 
-router.post('/note', async (req, res) => {
+router.post('/note/:noteId', async (req, res) => {
     try {
-
+        const {noteId} = req.params
+        console.log("in show note ", noteId)
+        const note = await getNote(noteId)
+        if (!note) {
+            const errorMessage = "There isn't note"
+            return res.render('showError', {errorMessage})
+        }
+        const content = note.content
+        const deletedNote = await deleteNote(noteId)
+        if (deletedNote)
+            return res.render('showNote', {content})
     }
     catch (err){
 
