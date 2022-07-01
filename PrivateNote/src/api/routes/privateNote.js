@@ -17,8 +17,8 @@ router.get('', async (req, res) => {
 router.post('/createNote', async (req, res) => {
     try {
         let {newNote} = req.body
-        let noteInfo = await addNoteToDB(newNote)
-        let noteLink = `http://localhost:${config.WEB_PORT}/private-note/note/${noteInfo}`
+        let noteID = await addNoteToDB(newNote)
+        let noteLink = `/private-note/note/${noteID}`
         return res.render('showLink', {noteLink})
     }
     catch (err){
