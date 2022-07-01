@@ -5,7 +5,7 @@ networks:
 
 services:
   PrivateNote:
-    container_name: "PrivateNote"
+    container_name: "private-note"
     build:
       context: .
       dockerfile: Dockerfile
