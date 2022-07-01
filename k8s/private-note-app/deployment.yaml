@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: private-note-app-deployment
+  labels:
+    app: private-note-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: private-note-app
+  template:
+    metadata:
+      labels:
+        app: private-note-app
+    spec:
+      containers:
+      - name: private-note-app-api
+        envFrom:
+          - configMapRef:
+              name: private-note-app-configs
+        image: private-note
+        imagePullPolicy: IfNotPresent
+
+        ports:
+        - containerPort: 3000
+

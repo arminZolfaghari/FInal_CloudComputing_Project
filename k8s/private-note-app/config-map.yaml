@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: private-note-app-configs
+  namespace: default
+data:
+  DB_USER: "admin1"
+  DB_PASS: "admin1"
+  DB_HOST: "mongodb"
+  DB_PORT: "27017"
+  DB_NAME: "private_notes"
+  WEB_PORT: "3000"
+  EXPIRE_TIME: "18000"
