@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 export async function addNoteToDB(content){
     const id = new mongoose.Types.ObjectId()
-    const newNote = new Note(
+    const newNote = Note.create(
         {
             _id: id,
             content,
@@ -12,10 +12,12 @@ export async function addNoteToDB(content){
             isDeleted: false
         }
     )
-    await newNote.save((err, newNote) => {
-        if (err)
-            console.log(`Error in save new note`)
-    })
+    // await newNote.save((err, newNote) => {
+    //     if (err)
+    //         console.log(`Error in save new note: ${err}`)
+    //     else
+    //         console.log(`newNote: ${newNote}`)
+    // })
 
     return id
 }
