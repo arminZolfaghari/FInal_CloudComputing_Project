@@ -1,5 +1,4 @@
 version: "3.7"
-
 networks:
   backend:
 
@@ -28,9 +27,9 @@ services:
     hostname: mongodb
     ports:
       - "27018:27017"
-#    environment:
-#     - MONGO_INITDB_ROOT_USERNAME=admin1
-#     - MONGO_INITDB_ROOT_PASSWORD=admin1
-#     - MONGO_INITDB_DATABASE=private_notes
+    environment:
+     - MONGO_INITDB_ROOT_USERNAME=admin1
+     - MONGO_INITDB_ROOT_PASSWORD=admin1
+     - MONGO_INITDB_DATABASE=private_notes
     networks:
       - backend
