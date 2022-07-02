@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  labels:
+    app: {{ .Values.deployment.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.name }}
+    spec:
+      containers:
+      - name: {{ .Values.deployment.name }}
+        image: mongo
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 27017
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.config.name }}
+          - secretRef:
+              name: {{ .Values.secret.name }}
+        volumeMounts:
+          - name: mongodb-persistent-storage
+            mountPath: /data/db
+
+      volumes:
+      - name: mongodb-persistent-storage
+        persistentVolumeClaim:
+            claimName: {{ .Values.pvc.name }}
+
+
+
